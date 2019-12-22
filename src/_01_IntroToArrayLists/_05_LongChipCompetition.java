@@ -17,9 +17,37 @@ public class _05_LongChipCompetition {
 	public static void main(String[] args) {
 		_05_LongChipCompetition lcc = new _05_LongChipCompetition();
 		lcc.initializeBeatles();
-		
+		lcc.run();
 	}
-	
+
+	void run() {
+		ArrayList<Chip> beats;
+		int i;
+		ArrayList <Double> max = new ArrayList <Double> ();
+		 double longest = 0.0;
+		 int finish = 0;
+		for( i = 0;i<theBeatles.size();i++) {
+			beats = theBeatles.get(i).getChips();
+			for(int j = 0;j<beats.size()-1;j++) {
+				if(beats.get(j).getLength()>longest) {
+					longest = beats.get(j).getLength();
+				}
+				
+			}
+			max.add(longest);
+		}
+		//find longest in max
+		longest = 0;
+		for(int j = 0;j<max.size();j++) {
+			if(max.get(j)>longest) {
+				finish=j;
+				longest = max.get(j);
+			}
+			
+		}
+		System.out.println(theBeatles.get(finish).getName());
+}
+
 	private void initializeBeatles() {
 		Beatle george = new Beatle("George");
 		Beatle john = new Beatle("John");
@@ -30,8 +58,8 @@ public class _05_LongChipCompetition {
 		theBeatles.add(paul);
 		theBeatles.add(ringo);
 	}
-	
-	public ArrayList<Beatle> getTheBand(){
+
+	public ArrayList<Beatle> getTheBand() {
 		return theBeatles;
 	}
 }
