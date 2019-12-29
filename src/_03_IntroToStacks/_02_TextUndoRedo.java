@@ -14,7 +14,7 @@ public class _02_TextUndoRedo {
 	 * Make it so that every time the BACKSPACE key is pressed, the last character
 	 * is erased from the JLabel. Save that deleted character onto a Stack of
 	 * Characters.
-	 * 
+	 *  
 	 * Choose a key to be the Undo key. Make it so that when that key is pressed,
 	 * the top Character is popped off the Stack and added back to the JLabel.
 	 * 
