@@ -22,10 +22,10 @@ public class _03_TestMatchingBrackets {
 	Stack <Character> stack = new Stack<Character>();
 	private boolean doBracketsMatch(String b) {
 		for(int i = 0;i<b.length();i++) {
-			if(b.charAt(i-1)==('{')) {
-				stack.push(b.charAt(i-1));
+			if(b.charAt(i)==('{')) {
+				stack.push(b.charAt(i));
 			}
-			else if(b.charAt(i-1)==('}')){
+			else if(b.charAt(i)==('}')){
 				stack.pop();
 			}
 			
