@@ -17,14 +17,18 @@ public class HangMan implements KeyListener {
 	static Stack<String> words = new <String>Stack();
 	static String lastWord = "";
 	static boolean finished = true;
+	static boolean found = false;
 	static int word;
 	int lives = 5;
-
+	static int plays;
+	static HangMan man;
+	
 	public static void main(String[] args) {
-		HangMan man = new HangMan();
+		man = new HangMan();
 		man.run();
 		String Input = JOptionPane.showInputDialog("How many words do you want to guess?");
 		int input = Integer.parseInt(Input);
+		plays = input;
 		word = input;
 		for (int i = 0; i < input; i++) {
 			if (finished) {
@@ -60,6 +64,7 @@ public class HangMan implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+		found = false;
 		for (int i = 0; i < label.getText().length(); i++) {
 			if (lastWord.charAt(i) == e.getKeyChar()) {
 				String s = label.getText();
@@ -67,17 +72,53 @@ public class HangMan implements KeyListener {
 				label.setText(s.substring(0, i) + lastWord.charAt(i) + s.substring(i + 1, s.length()));
 				frame.pack();
 				System.out.println(lives);
-			} else if(i==label.getText().length()){
-				lives--;
-				if(lives==0) {
-					JOptionPane.showMessageDialog(null, "You Lose");
+				found = true;
+			} 
+		}
+		if(!found) {
+			lives--;
+			System.out.println(lives);
+			if(lives==0) {
+				JOptionPane.showMessageDialog(null, "You Lose");
+				plays--;
+				if(plays != 0) {
+					man.run();
+					String Input = JOptionPane.showInputDialog("How many words do you want to guess?");
+					int input = Integer.parseInt(Input);
+					plays = input;
+					word = input;
+					for (int i = 0; i < input; i++) {
+						if (finished) {
+							man.newWord();
+							System.out.println(lastWord);
+
+						}
+						finished = false;
+					}
+				
 				}
 			}
-			if (!label.getText().contains("_")) {
-				finished = true;
+		}
+		if (!label.getText().contains("_")) {
+			finished = true;
+			JOptionPane.showMessageDialog(null, "You Win");
+			plays--;
+			if(plays != 0) {
+				man.run();
+				String Input = JOptionPane.showInputDialog("How many words do you want to guess?");
+				int input = Integer.parseInt(Input);
+				plays = input;
+				word = input;
+				for (int i = 0; i < input; i++) {
+					if (finished) {
+						man.newWord();
+						System.out.println(lastWord);
+
+					}
+					finished = false;
+				}
 			}
 		}
-		
 	}
 
 	@Override
