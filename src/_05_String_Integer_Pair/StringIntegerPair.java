@@ -46,19 +46,15 @@ private int[] values;
 	//5. Complete the method so it returns the value located at the passed in key.
 	//   If the key does not exist, return Integer.MIN_VALUE.
 	public int get(String key) {
-		boolean found = false;
 		int i;
 		for(i = 0; i<keys.length;i++) {
-			if(keys[i].contentEquals(key)) {
-				found = true;
+			if(keys[i].equals(key)) {
+				return values[i];
 			}
 		}
-		if(!found) {
+		
 		return Integer.MIN_VALUE;
-		}
-		else {
-			return i;
-		}
+		
 	}
 	
 	//6. Complete the containsKey method so that it returns true if the
@@ -75,17 +71,21 @@ private int[] values;
 	//7. Complete the containsValue method so that it returns true if the
 	//   passed in value is contained in the values array
 	public boolean containsValue(int value) {
-		
+		for(int i = 0; i<values.length;i++) {
+			if(values[i]==value) {
+				return true;
+			}
+		}
 		return false;
 	}
 	
 	//8. Complete the getKeysMethod so it returns the keys as an array
 	public String[] getKeys() {
-		return null;
+		return keys;
 	}
 	
 	//9. Complete the getValues so it returns the values as an array
 	public int[] getValues() {
-		return null;
+		return values;
 	}
 }
